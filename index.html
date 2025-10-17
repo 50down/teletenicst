@@ -13,6 +13,25 @@
     defer
   ></script>
 
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  
+  // INICIALIZA O SEU PIXEL COM O ID FORNECIDO
+  fbq('init', '1049267370048001'); 
+  
+  // Dispara o PageView padrão (bom para ter)
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1049267370048001&ev=PageView&noscript=1"
+  /></noscript>
   <style>
     /* CSS simplificado para a página de redirecionamento */
     html, body {
@@ -33,7 +52,7 @@
 
   <script>
     // ==========================================================
-    // ===               LINKS ATUALIZADOS AQUI               ===
+    // ===               LINKS (SEM ALTERAÇÃO)                ===
     // ==========================================================
 
     // Link principal para DESKTOPS/NOTEBOOKS (DO CÓDIGO ORIGINAL)
@@ -48,39 +67,64 @@
     ];
     
     // ==========================================================
-    // ===              FIM DA ÁREA DOS LINKS                 ===
-    // ==========================================================
-
-
+    
     /**
-     * Função simples para detectar mobile (suficiente para a maioria dos casos)
+     * Função simples para detectar mobile
      */
     function isMobileDevice() {
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    /**
-     * LÓGICA DE REDIRECIONAMENTO DIRETO
-     * Não é mais necessário clicar em nada.
-     */
+
+    // ==========================================================
+    // ===      LÓGICA DE REDIRECIONAMENTO (MODIFICADA)       ===
+    // ==========================================================
     try {
+      let targetUrl; // Variável para guardar o link final
+
+      // 1. DECIDE QUAL LINK USAR
       if (!isMobileDevice()) {
-        // Se NÃO for mobile -> redireciona para o link de desktop
-        // Usamos .replace() para que o usuário não possa "voltar" para esta página
-        window.location.replace(desktopForceLink);
+        // Se NÃO for mobile
+        targetUrl = desktopForceLink;
       } else {
-        // Se for mobile -> usa rotação aleatória
-        
-        // Verifica se a lista de links não está vazia
+        // Se for mobile
         if (links && links.length > 0) {
           const randomLink = links[Math.floor(Math.random() * links.length)];
-          window.location.replace(randomLink);
+          targetUrl = randomLink;
         } else {
-          // Se a lista 'links' estiver vazia, redireciona para o link desktop como fallback
-          console.warn("A lista de links 'links' está vazia. Redirecionando para o link desktop.");
-          window.location.replace(desktopForceLink);
+          console.warn("A lista 'links' está vazia. Usando link desktop.");
+          targetUrl = desktopForceLink; // Fallback
         }
       }
+
+      // 2. PREPARA A FUNÇÃO DE REDIRECIONAMENTO
+      const performRedirect = function() {
+        window.location.replace(targetUrl);
+      };
+
+      // 3. DISPARA O PIXEL E REDIRECIONA
+      
+      // Define um pequeno atraso (em milissegundos)
+      // Isso dá tempo para o pixel enviar o evento antes da página mudar
+      const REDIRECT_DELAY_MS = 400; 
+
+      // Verifica se a função 'fbq' do Pixel foi carregada
+      if (typeof fbq === 'function') {
+        
+        // DISPARA O EVENTO 'ViewContent' SOLICITADO
+        fbq('track', 'ViewContent'); 
+        
+        // Aguarda o atraso e DEPOIS redireciona
+        setTimeout(performRedirect, REDIRECT_DELAY_MS);
+        
+      } else {
+        // Se o fbq não carregou (ex: AdBlocker)
+        console.warn('fbq não detectado. Redirecionando imediatamente.');
+        
+        // Redireciona imediatamente, sem atraso
+        performRedirect(); 
+      }
+      
     } catch (e) {
       console.error("Erro ao tentar redirecionar:", e);
       // Fallback final em caso de erro no script
