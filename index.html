@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>REDIRECIONADOR</title>
 
-  <!-- Script para capturar UTMs -->
   <script
     src="https://cdn.utmify.com.br/scripts/utms/latest.js"
     data-utmify-prevent-xcod-sck
@@ -15,105 +14,77 @@
   ></script>
 
   <style>
+    /* CSS simplificado para a página de redirecionamento */
     html, body {
       height: 100%;
       margin: 0;
       background: #ffffff;
-      user-select: none;
-    }
-
-    .center-viewport {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100%;
+      font-family: Arial, sans-serif;
+      color: #333;
+      user-select: none;
     }
-
-    .center-viewport a {
-      display: inline-block;
-      text-decoration: none;
-    }
-
-    .center-viewport img {
-      max-width: 90vw;
-      max-height: 90vh;
-      width: auto;
-      height: auto;
-      display: block;
-      object-fit: contain;
-      cursor: pointer;
-
-      /* Permitir clique na imagem */
-      pointer-events: auto;
-      user-drag: none;
-      -webkit-user-drag: none;
-      -moz-user-drag: none;
-      -ms-user-drag: none;
-    }
-
-    :focus { outline: none; }
   </style>
 </head>
 <body>
-  <div class="center-viewport">
-    <a id="redirectLink" href="#" aria-label="Redirecionar">
-      <img src="imagens/verification.jpg" alt="" aria-hidden="true" />
-    </a>
-  </div>
+  <p>Redirecionando...</p>
 
   <script>
-    // Link alvo para DESKTOPS/NOTEBOOKS
-    const desktopForceLink = "https://t.me/jamilevegashot_bot?start=go";
+    // ==========================================================
+    // ===               LINKS ATUALIZADOS AQUI               ===
+    // ==========================================================
 
-    // Lista de links para rotação (serão usados em dispositivos NÃO-desktop)
+    // Link principal para DESKTOPS/NOTEBOOKS (DO CÓDIGO ORIGINAL)
+    const desktopForceLink = "https://t.me/jamilevegashot_bot?start=go"; 
+
+    // Lista de links para rotação em MOBILES (OS NOVOS LINKS)
     const links = [
-      "https://t.me/chocolatequeen_pay101xzq_bot?start=go",
-      "https://t.me/pizzalord_pay102vkm_bot?start=go",
-      "https://t.me/isabellymartinez_bot_bot?start=go",
-      "https://t.me/smoothcream_pay103bpt_bot?start=go",
-      "https://t.me/velvetstorm_pay104ywd_bot?start=go"
+      "https://t.me/vazadinhomaster009_bot?start=go",
+      "https://t.me/vazdosteen18br_bot?start=go",
+      "https://t.me/teenvazadosbr18_bot?start=go",
+      "https://t.me/vazadosnoviteenbr018_bot?start=go"
     ];
+    
+    // ==========================================================
+    // ===              FIM DA ÁREA DOS LINKS                 ===
+    // ==========================================================
 
-    // Função simples para detectar mobile (suficiente para a maioria dos casos)
+
+    /**
+     * Função simples para detectar mobile (suficiente para a maioria dos casos)
+     */
     function isMobileDevice() {
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    const linkEl = document.getElementById("redirectLink");
-
-    if (!isMobileDevice()) {
-      // Se NÃO for mobile -> forçar o link de desktop
-      linkEl.href = desktopForceLink;
-
-      // Adiciona handler de clique para garantir redirecionamento mesmo se algo bloquear o href
-      linkEl.addEventListener("click", function(e){
-        e.preventDefault();
-        // Redireciona na mesma aba
-        window.location.href = desktopForceLink;
-      });
-
-      // Também permite ativação via teclado (Enter)
-      linkEl.addEventListener("keydown", function(e){
-        if (e.key === "Enter" || e.keyCode === 13) {
-          e.preventDefault();
-          window.location.href = desktopForceLink;
+    /**
+     * LÓGICA DE REDIRECIONAMENTO DIRETO
+     * Não é mais necessário clicar em nada.
+     */
+    try {
+      if (!isMobileDevice()) {
+        // Se NÃO for mobile -> redireciona para o link de desktop
+        // Usamos .replace() para que o usuário não possa "voltar" para esta página
+        window.location.replace(desktopForceLink);
+      } else {
+        // Se for mobile -> usa rotação aleatória
+        
+        // Verifica se a lista de links não está vazia
+        if (links && links.length > 0) {
+          const randomLink = links[Math.floor(Math.random() * links.length)];
+          window.location.replace(randomLink);
+        } else {
+          // Se a lista 'links' estiver vazia, redireciona para o link desktop como fallback
+          console.warn("A lista de links 'links' está vazia. Redirecionando para o link desktop.");
+          window.location.replace(desktopForceLink);
         }
-      });
-    } else {
-      // Se for mobile -> usa rotação aleatória normal
-      const randomLink = links[Math.floor(Math.random() * links.length)];
-      linkEl.href = randomLink;
-
-      // Handler opcional para garantir compatibilidade com bloqueadores
-      linkEl.addEventListener("click", function(e){
-        // não prevenimos; só garantimos que a navegação ocorra
-        // caso alguma coisa tente interceptar podemos forçar:
-        setTimeout(()=> {
-          if (window.location.href.indexOf(randomLink) === -1) {
-            window.location.href = randomLink;
-          }
-        }, 100);
-      });
+      }
+    } catch (e) {
+      console.error("Erro ao tentar redirecionar:", e);
+      // Fallback final em caso de erro no script
+      document.body.innerHTML = "Erro ao carregar a página. Tente novamente.";
     }
   </script>
 </body>
