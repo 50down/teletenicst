@@ -23,36 +23,65 @@
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
   
-  // INICIALIZA O SEU PIXEL COM O ID FORNECIDO
+  // INICIALIZA O SEU PIXEL
   fbq('init', '1049267370048001'); 
   
-  // Dispara o PageView padrão (bom para ter)
+  // Dispara o PageView padrão
   fbq('track', 'PageView');
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1049267370048001&ev=PageView&noscript=1"
   /></noscript>
   <style>
-    /* CSS simplificado para a página de redirecionamento */
     html, body {
       height: 100%;
       margin: 0;
       background: #ffffff;
+      user-select: none;
+    }
+
+    .center-viewport {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: Arial, sans-serif;
-      color: #333;
-      user-select: none;
+      height: 100%;
     }
+
+    .center-viewport a {
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .center-viewport img {
+      max-width: 90vw;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      cursor: pointer;
+
+      /* Permitir clique na imagem */
+      pointer-events: auto;
+      user-drag: none;
+      -webkit-user-drag: none;
+      -moz-user-drag: none;
+      -ms-user-drag: none;
+    }
+
+    :focus { outline: none; }
   </style>
 </head>
 <body>
-  <p>Redirecionando...</p>
+  <div class="center-viewport">
+    <a id="redirectLink" href="#" aria-label="Redirecionar">
+      <img src="imagens/verification.jpg" alt="" aria-hidden="true" />
+    </a>
+  </div>
 
   <script>
     // ==========================================================
-    // ===               LINKS (SEM ALTERAÇÃO)                ===
+    // ===               LINKS ATUALIZADOS AQUI               ===
     // ==========================================================
 
     // Link principal para DESKTOPS/NOTEBOOKS (DO CÓDIGO ORIGINAL)
@@ -67,7 +96,7 @@
     ];
     
     // ==========================================================
-    
+
     /**
      * Função simples para detectar mobile
      */
@@ -75,61 +104,65 @@
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
+    // Pega o elemento do link (a imagem)
+    const linkEl = document.getElementById("redirectLink");
+    let targetUrl; // Variável para guardar o link final
 
-    // ==========================================================
-    // ===      LÓGICA DE REDIRECIONAMENTO (MODIFICADA)       ===
-    // ==========================================================
-    try {
-      let targetUrl; // Variável para guardar o link final
+    // Define qual link será usado
+    if (!isMobileDevice()) {
+      // Se NÃO for mobile -> forçar o link de desktop
+      targetUrl = desktopForceLink;
+    } else {
+      // Se for mobile -> usa rotação aleatória
+      targetUrl = links[Math.floor(Math.random() * links.length)];
+    }
+    
+    // Define o 'href' do link (bom para acessibilidade e SEO)
+    linkEl.href = targetUrl;
 
-      // 1. DECIDE QUAL LINK USAR
-      if (!isMobileDevice()) {
-        // Se NÃO for mobile
-        targetUrl = desktopForceLink;
-      } else {
-        // Se for mobile
-        if (links && links.length > 0) {
-          const randomLink = links[Math.floor(Math.random() * links.length)];
-          targetUrl = randomLink;
-        } else {
-          console.warn("A lista 'links' está vazia. Usando link desktop.");
-          targetUrl = desktopForceLink; // Fallback
-        }
-      }
+    /**
+     * Função que dispara o pixel e redireciona
+     */
+    function handleClickAndRedirect(e) {
+      // Previne o clique padrão do link
+      e.preventDefault(); 
+      
+      const finalUrl = targetUrl; // Pega o URL que já definimos
+      const REDIRECT_DELAY_MS = 400; // Atraso para o pixel disparar
 
-      // 2. PREPARA A FUNÇÃO DE REDIRECIONAMENTO
+      // Função que faz o redirecionamento
       const performRedirect = function() {
-        window.location.replace(targetUrl);
+        window.location.href = finalUrl;
       };
 
-      // 3. DISPARA O PIXEL E REDIRECIONA
-      
-      // Define um pequeno atraso (em milissegundos)
-      // Isso dá tempo para o pixel enviar o evento antes da página mudar
-      const REDIRECT_DELAY_MS = 400; 
-
-      // Verifica se a função 'fbq' do Pixel foi carregada
+      // Tenta disparar o pixel
       if (typeof fbq === 'function') {
         
-        // DISPARA O EVENTO 'ViewContent' SOLICITADO
+        // DISPARA O EVENTO 'ViewContent'
         fbq('track', 'ViewContent'); 
         
-        // Aguarda o atraso e DEPOIS redireciona
+        // Espera o atraso e DEPOIS redireciona
         setTimeout(performRedirect, REDIRECT_DELAY_MS);
         
       } else {
         // Se o fbq não carregou (ex: AdBlocker)
         console.warn('fbq não detectado. Redirecionando imediatamente.');
-        
-        // Redireciona imediatamente, sem atraso
-        performRedirect(); 
+        performRedirect(); // Redireciona imediatamente
       }
-      
-    } catch (e) {
-      console.error("Erro ao tentar redirecionar:", e);
-      // Fallback final em caso de erro no script
-      document.body.innerHTML = "Erro ao carregar a página. Tente novamente.";
     }
+
+    // Adiciona o 'ouvinte' de clique
+    linkEl.addEventListener("click", handleClickAndRedirect);
+
+    // Bônus: Mantém o 'ouvinte' de teclado (Enter) do código original para desktop
+    if (!isMobileDevice()) {
+      linkEl.addEventListener("keydown", function(e){
+        if (e.key === "Enter" || e.keyCode === 13) {
+          handleClickAndRedirect(e);
+        }
+      });
+    }
+    
   </script>
 </body>
 </html>
