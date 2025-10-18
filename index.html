@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>REDIRECIONADOR</title>
 
+  <!-- UTMIFY -->
   <script
     src="https://cdn.utmify.com.br/scripts/utms/latest.js"
     data-utmify-prevent-xcod-sck
@@ -13,6 +14,7 @@
     defer
   ></script>
 
+  <!-- PIXEL FACEBOOK -->
   <script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -22,147 +24,101 @@
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
-  
-  // INICIALIZA O SEU PIXEL
-  fbq('init', '1049267370048001'); 
-  
-  // Dispara o PageView padrão
-  fbq('track', 'PageView');
+
+  fbq('init', '1049267370048001');
+  fbq('track', 'PageView'); 
   </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1049267370048001&ev=PageView&noscript=1"
-  /></noscript>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1049267370048001&ev=PageView&noscript=1"
+    />
+  </noscript>
+
   <style>
     html, body {
       height: 100%;
       margin: 0;
       background: #ffffff;
-      user-select: none;
-    }
-
-    .center-viewport {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100%;
+      font-family: "Poppins", sans-serif;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
-    .center-viewport a {
-      display: inline-block;
-      text-decoration: none;
+    .redirect-box {
+      text-align: center;
+      color: #000;
+      font-size: 18px;
+      line-height: 1.5;
     }
 
-    .center-viewport img {
-      max-width: 90vw;
-      max-height: 90vh;
-      width: auto;
-      height: auto;
-      display: block;
-      object-fit: contain;
-      cursor: pointer;
-
-      /* Permitir clique na imagem */
-      pointer-events: auto;
-      user-drag: none;
-      -webkit-user-drag: none;
-      -moz-user-drag: none;
-      -ms-user-drag: none;
+    .countdown {
+      font-weight: bold;
+      font-size: 22px;
+      margin-top: 10px;
     }
 
-    :focus { outline: none; }
+    /* Evita interação do usuário antes do redirecionamento */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: transparent;
+      z-index: 9999;
+      pointer-events: all;
+    }
   </style>
 </head>
 <body>
-  <div class="center-viewport">
-    <a id="redirectLink" href="#" aria-label="Redirecionar">
-      <img src="imagens/verification.jpg" alt="" aria-hidden="true" />
-    </a>
+  <div class="redirect-box">
+    <div>⏳ Redirecionando em <span class="countdown">3</span> segundos...</div>
   </div>
 
   <script>
-    // ==========================================================
-    // ===               LINKS ATUALIZADOS AQUI               ===
-    // ==========================================================
-
-    // Link principal para DESKTOPS/NOTEBOOKS (DO CÓDIGO ORIGINAL)
+    // ================================================
+    // ===               LINKS                     ====
+    // ================================================
     const desktopForceLink = "https://t.me/jamilevegashot_bot?start=go"; 
-
-    // Lista de links para rotação em MOBILES (OS NOVOS LINKS)
     const links = [
       "https://t.me/vazadinhomaster009_bot?start=go",
       "https://t.me/vazdosteen18br_bot?start=go",
       "https://t.me/teenvazadosbr18_bot?start=go",
       "https://t.me/vazadosnoviteenbr018_bot?start=go"
     ];
-    
-    // ==========================================================
 
-    /**
-     * Função simples para detectar mobile
-     */
     function isMobileDevice() {
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    // Pega o elemento do link (a imagem)
-    const linkEl = document.getElementById("redirectLink");
-    let targetUrl; // Variável para guardar o link final
+    const targetUrl = !isMobileDevice()
+      ? desktopForceLink
+      : links[Math.floor(Math.random() * links.length)];
 
-    // Define qual link será usado
-    if (!isMobileDevice()) {
-      // Se NÃO for mobile -> forçar o link de desktop
-      targetUrl = desktopForceLink;
-    } else {
-      // Se for mobile -> usa rotação aleatória
-      targetUrl = links[Math.floor(Math.random() * links.length)];
-    }
-    
-    // Define o 'href' do link (bom para acessibilidade e SEO)
-    linkEl.href = targetUrl;
-
-    /**
-     * Função que dispara o pixel e redireciona
-     */
-    function handleClickAndRedirect(e) {
-      // Previne o clique padrão do link
-      e.preventDefault(); 
-      
-      const finalUrl = targetUrl; // Pega o URL que já definimos
-      const REDIRECT_DELAY_MS = 400; // Atraso para o pixel disparar
-
-      // Função que faz o redirecionamento
-      const performRedirect = function() {
-        window.location.href = finalUrl;
-      };
-
-      // Tenta disparar o pixel
+    // Função principal com delay garantido
+    function redirectWithPixel() {
       if (typeof fbq === 'function') {
-        
-        // DISPARA O EVENTO 'ViewContent'
-        fbq('track', 'ViewContent'); 
-        
-        // Espera o atraso e DEPOIS redireciona
-        setTimeout(performRedirect, REDIRECT_DELAY_MS);
-        
-      } else {
-        // Se o fbq não carregou (ex: AdBlocker)
-        console.warn('fbq não detectado. Redirecionando imediatamente.');
-        performRedirect(); // Redireciona imediatamente
+        fbq('track', 'ViewContent');
       }
-    }
 
-    // Adiciona o 'ouvinte' de clique
-    linkEl.addEventListener("click", handleClickAndRedirect);
-
-    // Bônus: Mantém o 'ouvinte' de teclado (Enter) do código original para desktop
-    if (!isMobileDevice()) {
-      linkEl.addEventListener("keydown", function(e){
-        if (e.key === "Enter" || e.keyCode === 13) {
-          handleClickAndRedirect(e);
+      let seconds = 3;
+      const countdownEl = document.querySelector('.countdown');
+      const timer = setInterval(() => {
+        seconds--;
+        if (seconds > 0) {
+          countdownEl.textContent = seconds;
+        } else {
+          clearInterval(timer);
+          window.location.href = targetUrl;
         }
-      });
+      }, 1000);
     }
-    
+
+    window.addEventListener('load', redirectWithPixel);
   </script>
 </body>
 </html>
