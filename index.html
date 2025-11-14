@@ -1,182 +1,82 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>✅ANUNCIO VERIFICADO✅</title>
+  <meta charset="utf-8">
+  <title>Redirecionando...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  <!-- UTMIFY -->
-  <script
-    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-    data-utmify-prevent-xcod-sck
-    data-utmify-prevent-subids
-    async
-    defer
-  ></script>
-
-  <!-- PIXEL FACEBOOK -->
+  <!-- Meta Pixel Code -->
   <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src='https://connect.facebook.net/en_US/fbevents.js';
+    s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script');
 
-  fbq('init', '24787624360900134');
-  fbq('track', 'PageView');
+    fbq('init', '813504844807411');
+
+    // PageView 1x por usuário (por navegador)
+    (function() {
+      var key = 'fb_pageview_813504844807411';
+      try {
+        if (!localStorage.getItem(key)) {
+          fbq('track', 'PageView');
+          localStorage.setItem(key, '1');
+        }
+      } catch (e) {
+        // Se der erro no localStorage, manda normal
+        fbq('track', 'PageView');
+      }
+    })();
   </script>
-
+  <!-- Se quiser, pode remover o noscript abaixo -->
   <noscript>
     <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=24787624360900134&ev=PageView&noscript=1"
-    />
+      src="https://www.facebook.com/tr?id=813504844807411&ev=PageView&noscript=1"/>
   </noscript>
+  <!-- End Meta Pixel Code -->
 
   <style>
     html, body {
       height: 100%;
       margin: 0;
-      background: radial-gradient(circle at center, #1a0000, #000000, #1a0000);
+      padding: 0;
+      background: linear-gradient(135deg, #0055ff, #00aaff);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "Poppins", sans-serif;
-      color: #fff;
-      overflow: hidden;
-      user-select: none;
-      -webkit-user-select: none;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #ffffff;
+      text-align: center;
     }
 
-    @keyframes pulse {
-      0% { background-color: #1a0000; }
-      50% { background-color: #400000; }
-      100% { background-color: #1a0000; }
-    }
-    body { animation: pulse 6s infinite alternate; }
-
-    .particle {
-      position: absolute;
-      background: rgba(255, 0, 0, 0.15);
-      border-radius: 50%;
-      width: 6px;
-      height: 6px;
-      animation: float 8s linear infinite;
-    }
-    @keyframes float {
-      from { transform: translateY(100vh) scale(0); opacity: 0; }
-      50% { opacity: 1; }
-      to { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    .box {
+      background: rgba(0, 0, 0, 0.15);
+      padding: 24px 32px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      backdrop-filter: blur(6px);
     }
 
-    .redirect-box { text-align: center; z-index: 10; }
-    .redirect-box h1 {
-      font-weight: 600;
-      font-size: 22px;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-      color: #ff4d4d;
-      text-shadow: 0 0 10px #ff0000;
-    }
-    .countdown {
-      font-weight: bold;
-      font-size: 26px;
-      color: #ff1a1a;
-      text-shadow: 0 0 10px #ff0000;
+    h1 {
+      margin: 0 0 8px;
+      font-size: 1.8rem;
     }
 
-    .spinner {
-      margin: 25px auto;
-      width: 60px;
-      height: 60px;
-      border: 4px solid rgba(255,255,255,0.1);
-      border-top: 4px solid #ff1a1a;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      box-shadow: 0 0 10px #ff0000;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: transparent;
-      z-index: 9999;
-      pointer-events: all;
+    p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 0.95rem;
     }
   </style>
 </head>
 <body>
-  <div id="particles"></div>
-
-  <div class="redirect-box">
-    <h1>🔥 Redirecionando em <span class="countdown">3</span> segundos...</h1>
-    <div class="spinner"></div>
-    <p>Prepare-se... seu acesso está sendo liberado 💋</p>
+  <div class="box">
+    <h1>Redirecionando...</h1>
+    <p>Aguarde um instante, estamos processando seu acesso.</p>
   </div>
-
-  <!-- Som ambiente sensual (sussurro leve, não explícito) -->
-  <audio id="softWhisper" preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_f24d89e7e3.mp3?filename=soft-whisper-ambient-124479.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    const desktopForceLink = "https://t.me/jamilevegashot_bot?start=go"; 
-    const links = [
-      "https://t.me/vazadinhomaster009_bot?start=go",
-      "https://t.me/vazdosteen18br_bot?start=go",
-      "https://t.me/teenvazadosbr18_bot?start=go",
-      "https://t.me/vazadosnoviteenbr018_bot?start=go"
-    ];
-
-    function isMobileDevice() {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    }
-
-    const targetUrl = !isMobileDevice()
-      ? desktopForceLink
-      : links[Math.floor(Math.random() * links.length)];
-
-    const particlesContainer = document.getElementById("particles");
-    for (let i = 0; i < 40; i++) {
-      const particle = document.createElement("div");
-      particle.classList.add("particle");
-      particle.style.left = Math.random() * 100 + "vw";
-      particle.style.animationDelay = Math.random() * 5 + "s";
-      particle.style.animationDuration = 6 + Math.random() * 5 + "s";
-      particle.style.width = particle.style.height = 2 + Math.random() * 5 + "px";
-      particlesContainer.appendChild(particle);
-    }
-
-    function redirectWithPixel() {
-      if (typeof fbq === 'function') fbq('track', 'ViewContent');
-
-      const whisper = document.getElementById("softWhisper");
-      whisper.volume = 0.8;
-      whisper.play().catch(()=>{});
-
-      let seconds = 3;
-      const countdownEl = document.querySelector('.countdown');
-      const timer = setInterval(() => {
-        seconds--;
-        if (seconds > 0) {
-          countdownEl.textContent = seconds;
-        } else {
-          clearInterval(timer);
-          if (navigator.vibrate) navigator.vibrate(120);
-          setTimeout(() => window.location.href = targetUrl, 300);
-        }
-      }, 1000);
-    }
-
-    window.addEventListener('load', redirectWithPixel);
-  </script>
 </body>
 </html>
