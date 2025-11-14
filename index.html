@@ -5,7 +5,7 @@
   <title>Redirecionando...</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  <!-- Meta Pixel Code -->
+  <!-- Pixel Meta -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -18,7 +18,7 @@
 
     fbq('init', '813504844807411');
 
-    // PageView 1x por usuário (por navegador)
+    // PageView apenas 1x por usuário
     (function() {
       var key = 'fb_pageview_813504844807411';
       try {
@@ -27,56 +27,59 @@
           localStorage.setItem(key, '1');
         }
       } catch (e) {
-        // Se der erro no localStorage, manda normal
         fbq('track', 'PageView');
       }
     })();
   </script>
-  <!-- Se quiser, pode remover o noscript abaixo -->
+
   <noscript>
     <img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=813504844807411&ev=PageView&noscript=1"/>
   </noscript>
-  <!-- End Meta Pixel Code -->
 
   <style>
     html, body {
       height: 100%;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #0055ff, #00aaff);
+      background: linear-gradient(135deg, #0044cc, #0099ff);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: #ffffff;
+      font-family: system-ui, sans-serif;
+      color: white;
       text-align: center;
     }
-
     .box {
-      background: rgba(0, 0, 0, 0.15);
+      background: rgba(0,0,0,0.15);
       padding: 24px 32px;
       border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
       backdrop-filter: blur(6px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.25);
     }
-
-    h1 {
-      margin: 0 0 8px;
-      font-size: 1.8rem;
-    }
-
-    p {
-      margin: 0;
-      opacity: 0.9;
-      font-size: 0.95rem;
-    }
+    h1 { margin: 0; font-size: 1.7rem; }
+    p  { opacity: .9; margin-top: 8px; }
   </style>
+
+  <script>
+    window.addEventListener("load", () => {
+      const params = new URLSearchParams(window.location.search);
+      const luva = params.get("luva");
+
+      // Apenas redireciona se for exatamente "vaidaroi"
+      if (luva === "vaidaroi") {
+        setTimeout(() => {
+          window.location.href = "https://app.grimbots.online/go/manobra?grim=4z7q279j2q";
+        }, 900);
+      }
+    });
+  </script>
+
 </head>
+
 <body>
   <div class="box">
-    <h1>Redirecionando...</h1>
-    <p>Aguarde um instante, estamos processando seu acesso.</p>
+    <h1>Vai para apex safadinho 😏</h1>
+    <p>Acesso padrão carregado. Nenhum parâmetro especial detectado.</p>
   </div>
 </body>
 </html>
