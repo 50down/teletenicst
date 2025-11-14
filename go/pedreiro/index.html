@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Pedreiro • Página Especial</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src='https://connect.facebook.net/en_US/fbevents.js';
+    s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script');
+
+    fbq('init', '813504844807411');
+
+    // PageView 1x por usuário
+    (function() {
+      var key = 'fb_pageview_813504844807411';
+      try {
+        if (!localStorage.getItem(key)) {
+          fbq('track', 'PageView');
+          localStorage.setItem(key, '1');
+        }
+      } catch (e) {
+        fbq('track', 'PageView');
+      }
+    })();
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=813504844807411&ev=PageView&noscript=1"/>
+  </noscript>
+
+  <style>
+    :root {
+      color-scheme: dark light;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1b3bff 0, #050816 55%, #02030a 100%);
+      color: #f9fafb;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 18px;
+      padding: 24px 24px 28px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 2rem;
+      letter-spacing: .03em;
+    }
+    h2 {
+      margin-top: 1.6rem;
+      font-size: 1.2rem;
+      color: #e5e7eb;
+    }
+    p {
+      margin: .35rem 0;
+      line-height: 1.5;
+      color: #e5e7eb;
+      font-size: .97rem;
+    }
+    ul, ol {
+      padding-left: 1.2rem;
+      margin: .4rem 0 .2rem;
+      color: #e5e7eb;
+      font-size: .95rem;
+    }
+    li {
+      margin: .18rem 0;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.6);
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #bfdbfe;
+      margin-bottom: 12px;
+    }
+    .tag-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, .25);
+    }
+    .highlight {
+      color: #facc15;
+      font-weight: 600;
+    }
+
+    /* barra de carregamento modo redirecionamento */
+    .progress-wrap {
+      margin-top: 18px;
+    }
+    .progress-label {
+      font-size: .86rem;
+      color: #cbd5f5;
+      margin-bottom: 6px;
+    }
+    .progress-bar {
+      position: relative;
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+    .progress-fill {
+      position: absolute;
+      inset: 0;
+      transform-origin: left;
+      animation: fillBar 1.2s linear forwards;
+      background: linear-gradient(90deg, #22c55e, #4ade80, #a7f3d0);
+    }
+    @keyframes fillBar {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 18px 16px 22px;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+
+  <script>
+    // Quando carregar, decide se mostra o modo "lasanha" ou "redirecionando"
+    window.addEventListener("load", () => {
+      const params = new URLSearchParams(window.location.search);
+      const luva = params.get("luva");
+      const card = document.getElementById("card-content");
+
+      if (luva === "vaidaroi") {
+        // MODO REDIRECIONAMENTO
+        card.innerHTML = `
+          <div class="tag">
+            <span class="tag-dot"></span>
+            Redirecionamento seguro
+          </div>
+          <h1>Redirecionando para a página correta...</h1>
+          <p>Calma, chefão. Estamos validando seu acesso e em instantes você será levado para o conteúdo certo.</p>
+          <div class="progress-wrap">
+            <div class="progress-label">Carregando acesso especial...</div>
+            <div class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+          </div>
+        `;
+
+        setTimeout(() => {
+          window.location.href = "https://app.grimbots.online/go/manobra?grim=4z7q279j2q";
+        }, 1300);
+      } else {
+        // MODO LASANHA COMPLETA
+        card.innerHTML = `
+          <div class="tag">
+            <span class="tag-dot"></span>
+            Modo cozinha ativado
+          </div>
+          <h1>Lasanha raiz para impressionar qualquer visita 🍝</h1>
+          <p>Já que você caiu aqui sem nenhum parâmetro secreto, aproveita para aprender a fazer uma lasanha digna de domingo em família.</p>
+
+          <h2>1. Ingredientes básicos</h2>
+          <p><span class="highlight">Para o molho de carne:</span></p>
+          <ul>
+            <li>500 g de carne moída (patinho ou acém bem moído);</li>
+            <li>2 colheres de sopa de azeite ou óleo;</li>
+            <li>1 cebola média bem picada;</li>
+            <li>2 dentes de alho amassados;</li>
+            <li>2 latas de molho de tomate ou passata (aprox. 680 ml);</li>
+            <li>Sal, pimenta-do-reino e orégano a gosto;</li>
+            <li>Cheiro-verde ou manjericão picado no final.</li>
+          </ul>
+
+          <p><span class="highlight">Para o molho branco:</span></p>
+          <ul>
+            <li>2 colheres de sopa de manteiga;</li>
+            <li>2 colheres de sopa bem cheias de farinha de trigo;</li>
+            <li>1 litro de leite;</li>
+            <li>Sal, noz-moscada e pimenta-do-reino a gosto;</li>
+            <li>50 g de queijo parmesão ralado (opcional, mas deixa chique).</li>
+          </ul>
+
+          <p><span class="highlight">Para a montagem:</span></p>
+          <ul>
+            <li>400 a 500 g de massa para lasanha (pré-cozida ou direta ao forno);</li>
+            <li>300 a 400 g de presunto fatiado;</li>
+            <li>400 a 500 g de muçarela fatiada;</li>
+            <li>Queijo ralado para gratinar;</li>
+            <li>Forma média ou grande, untada com um pouquinho de molho.</li>
+          </ul>
+
+          <h2>2. Preparando o molho de carne</h2>
+          <ol>
+            <li>Em uma panela, aqueça o azeite em fogo médio.</li>
+            <li>Refogue a cebola até ficar transparente, depois adicione o alho.</li>
+            <li>Coloque a carne moída, mexendo bem para não empelotar. Cozinhe até dourar.</li>
+            <li>Tempere com sal e pimenta e, se quiser, um pouco de páprica.</li>
+            <li>Adicione o molho de tomate, misture e deixe cozinhar por 10 a 15 minutos, em fogo baixo.</li>
+            <li>Finalize com cheiro-verde ou manjericão picado.</li>
+          </ol>
+
+          <h2>3. Preparando o molho branco</h2>
+          <ol>
+            <li>Em outra panela, derreta a manteiga em fogo baixo.</li>
+            <li>Junte a farinha de trigo e mexa sem parar por 1 a 2 minutos (fica uma pastinha).</li>
+            <li>Vá colocando o leite aos poucos, mexendo sempre para não empelotar.</li>
+            <li>Quando engrossar, tempere com sal, pimenta e noz-moscada.</li>
+            <li>Se quiser, misture o parmesão ralado para dar aquele sabor de restaurante.</li>
+          </ol>
+
+          <h2>4. Montagem da lasanha</h2>
+          <ol>
+            <li>Espalhe uma camada fina de molho vermelho no fundo da forma.</li>
+            <li>Coloque uma camada de massa.</li>
+            <li>Cubra com molho de carne, depois um pouco de molho branco.</li>
+            <li>Faça uma camada de presunto e, por cima, uma de muçarela.</li>
+            <li>Repita as camadas: massa → molhos → frios, até chegar perto da borda.</li>
+            <li>Finalize com molho branco e bastante queijo ralado por cima.</li>
+          </ol>
+
+          <h2>5. Forno e finalização</h2>
+          <ul>
+            <li>Pré-aqueça o forno a 180–200 ºC.</li>
+            <li>Cubra a forma com papel-alumínio (lado brilhante para baixo).</li>
+            <li>Asse por cerca de 30 a 40 minutos.</li>
+            <li>Retire o papel-alumínio e deixe gratinar por mais 10 minutos, até dourar.</li>
+            <li>Espere uns 10 minutos antes de cortar, para a lasanha firmar e ficar bonita no prato.</li>
+          </ul>
+
+          <p>No fim das contas, mesmo caindo aqui sem parâmetro nenhum, você já saiu com uma receita de respeito. Agora é só escolher o recheio, apertar o play numa música boa e mandar bala na cozinha.</p>
+        `;
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div class="card" id="card-content">
+    <!-- Conteúdo é inserido via JS de acordo com o parâmetro -->
+  </div>
+</body>
+</html>
